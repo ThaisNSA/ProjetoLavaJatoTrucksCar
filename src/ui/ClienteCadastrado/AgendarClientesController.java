@@ -152,7 +152,7 @@ public class AgendarClientesController implements Initializable {
     @FXML
     private void salvar(ActionEvent event) {
          //Verificar se está atualizando ou inserindo
-        if (tfID.getText().isEmpty()) { //inserindo
+       /* if (tfID.getText().isEmpty()) { //inserindo
 
             //Criando o objeto agendamento
             Agendamento a = new Agendamento(
@@ -202,7 +202,7 @@ public class AgendarClientesController implements Initializable {
         }
 
         //Limpando o form
-        limparCampos();
+        limparCampos();*/
     }
     /**
      * Limpa os campos do formulário
@@ -218,7 +218,7 @@ public class AgendarClientesController implements Initializable {
      @FXML
     private void editar(ActionEvent event) {
         
-        //Pegar o agendamento selecionado na tabela 
+      /*  //Pegar o agendamento selecionado na tabela 
         selecionado = tabela.getSelectionModel().getSelectedItem();
 
         //Se tem algum agendamento selecionado
@@ -233,13 +233,13 @@ public class AgendarClientesController implements Initializable {
             
         }else{//não selecionou agendamento na tabela
             AlertaUtil.mensagemErro("Selecione um Clinte.");
-        }
+        }*/
     }
 
     @FXML
     private void excluir(ActionEvent event) {
         
-        //Pegar o agendamento selecionado na tabela 
+        /*//Pegar o agendamento selecionado na tabela 
         selecionado = tabela.getSelectionModel().getSelectedItem();
         
         //Se tem algum agendamento selecionado
@@ -263,13 +263,13 @@ public class AgendarClientesController implements Initializable {
                 listarAgendamentoTabela();
             }
         
-        }
+        }*/
     }
     
     @FXML
     private void pesquisar(ActionEvent event) {
         
-         //Limpando quaisquer dados anteriores
+       /*  //Limpando quaisquer dados anteriores
         dados.clear();
 
         //Pegando o cliente que a pessoa deseja pesquisar
@@ -285,8 +285,8 @@ public class AgendarClientesController implements Initializable {
         //Jogando os dados na tabela
         tabela.setItems(dados);
         
-    }
+    }*/
 
     }
     
-        
+}     

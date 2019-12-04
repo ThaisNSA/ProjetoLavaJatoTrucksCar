@@ -30,21 +30,10 @@ public class Agendamento {
     private String porteDoAutomovel;
     private String tipoDeLavagem;
     private BigDecimal valor;
-
-    public Set<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(Set<Cliente> clientes) {
-        this.clientes = clientes;
-    }
     
     @ManyToOne (optional = false)
     private Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Set<Cliente> clientes = new HashSet<Cliente>();
-    
      //Construtor vazio da JPA (OBRIGATÓRIO)
     public Agendamento(){}
     

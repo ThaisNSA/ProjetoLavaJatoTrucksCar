@@ -6,12 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import util.JPAUtil;
 
 
 public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        JPAUtil.getGerenciador();
+        
         Parent root = FXMLLoader.load(getClass().getResource("Principal.fxml"));
         
         Scene scene = new Scene(root);

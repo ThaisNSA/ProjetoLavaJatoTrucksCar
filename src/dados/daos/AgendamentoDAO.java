@@ -1,7 +1,7 @@
 
 package dados.daos;
 
-import dados.dto.AgendamentoCliente;
+
 import dados.entidades.Agendamento;
 import dados.entidades.Cliente;
 import java.util.List;
@@ -120,9 +120,6 @@ public class AgendamentoDAO {
 
         //sincronizar com o BD para tornar o status managed
         agendamento = gerenciador.merge(agendamento);
-        
-        //Adicionar o cliente
-        agendamento.getClientes().add(cliente);
 
         //Commit na transação
         gerenciador.getTransaction().commit();
