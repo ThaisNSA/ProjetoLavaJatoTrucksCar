@@ -5,6 +5,7 @@
  */
 package ui.ClienteCadastrado;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -29,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import servicos.AgendamentoServico;
+import servicos.ClienteServico;
 import util.AlertaUtil;
 
 /**
@@ -40,8 +42,6 @@ public class AgendarClientesController implements Initializable {
 
     @FXML
     private JFXTextField tfID;
-    @FXML
-    private JFXTextField tfCliente;
     @FXML
     private Label labelPorteDoAutomovel;
     @FXML
@@ -59,6 +59,7 @@ public class AgendarClientesController implements Initializable {
     
       //Atributos para representar os servicos
     private AgendamentoServico agendamentoServico = new AgendamentoServico();
+    private ClienteServico servico = new ClienteServico();
     
 
     @FXML
@@ -85,6 +86,12 @@ public class AgendarClientesController implements Initializable {
     //Atributo que vai armazenar qual o cliente 
     //foi selecionado na tabela
     private Agendamento selecionado;
+    @FXML
+    private JFXComboBox<String> cbPorteDoAutomovel;
+    @FXML
+    private JFXComboBox<String> cbTipoDeLavagem;
+    @FXML
+    private JFXComboBox<Cliente> cbCliente;
    
     
     /**
@@ -98,6 +105,36 @@ public class AgendarClientesController implements Initializable {
 
         //Carregue a lista de clientes na tabela
         listarAgendamentoTabela();
+        
+        listarClientes();
+        
+         //Configurar os elementos que vao aparecer no 
+        //combobox
+        
+        //Criar uma Lista JavaFX de String para
+        //colocar no combobox
+        ObservableList lista1 = FXCollections.observableArrayList();
+        lista1.add("Pequeno");
+        lista1.add("Médio");
+        lista1.add("Grande");
+        
+        //Adicionar a lista no comboBox
+        cbPorteDoAutomovel.setItems(lista1);
+        
+       
+        
+       
+        
+        //Criar uma Lista JavaFX de String para
+        //colocar no combobox
+        ObservableList lista2 = FXCollections.observableArrayList();
+        lista2.add("Ducha");
+        lista2.add("Lavagem Completa");
+        
+        //Adicionar a lista no comboBox
+        cbTipoDeLavagem.setItems(lista2);
+        
+         
     }   
     
     private void configurarTabela() {
@@ -132,6 +169,8 @@ public class AgendarClientesController implements Initializable {
         //Solicitando a camada de servico a lista de clientes
         List<Agendamento> agendamento = agendamentoServico.listar();
         
+        //  System.out.println("Size: " + agendamento.size());
+        
         //Transformar a lista de clientes no formato que a tabela
         //do JavaFX aceita
         dados = FXCollections.observableArrayList(agendamento);
@@ -148,24 +187,36 @@ public class AgendarClientesController implements Initializable {
     @FXML
     private void cbTipoDeLavagem(ActionEvent event) {
     }
+    
+     private void listarClientes() {
+
+        List<Cliente> clientes = servico.listar();
+
+        cbCliente.setItems(FXCollections.observableArrayList(clientes));
+     }
+
 
     @FXML
     private void salvar(ActionEvent event) {
          //Verificar se está atualizando ou inserindo
-       /* if (tfID.getText().isEmpty()) { //inserindo
+        if (tfID.getText().isEmpty()) { //inserindo
 
             //Criando o objeto agendamento
             Agendamento a = new Agendamento(
-                    tfCliente.getText(),
+                    cbCliente.getValue(),
+                    cbPorteDoAutomovel.getValue(),
+                    cbTipoDeLavagem.getValue(),
                     dateAgendamento.getValue(),
                     timeAgendamento.getValue(),
                     new BigDecimal(taValor.getText()));
-
+                    
+                    
+            
             //Mandando para a camada de serviço salvar
             agendamentoServico.salvar(a);
 
             //Exibindo mensagem
-            AlertaUtil.mensagemSucesso("Filme salvo com sucesso!");
+            AlertaUtil.mensagemSucesso("Agendamento salvo com sucesso!");
 
             //Carregando lista de agendamentos
             listarAgendamentoTabela();
@@ -182,34 +233,33 @@ public class AgendarClientesController implements Initializable {
                 
                 //Pegar os novos dados do formulário e
                 //atualizar o agendamento
-                selecionado.setCliente( new Cliente(tfCliente.getText()));
+                selecionado.setCliente(cbCliente.getValue());
                 selecionado.setValor(new BigDecimal(taValor.getText()));
                 selecionado.setDataAgendamento(dateAgendamento.getValue());
                 selecionado.setHoraAgendamento(timeAgendamento.getValue());
-                
-                
+                selecionado.setTipoDeLavagem(cbTipoDeLavagem.getValue());
+                selecionado.setPorteDoAutomovel(cbPorteDoAutomovel.getValue());
                 //Mandando para a camada de serviço salvar as alterações
                 agendamentoServico.editar(selecionado);
                 
                 //Exibindo mensagem
                 AlertaUtil.mensagemSucesso("Agendamento atualizado com sucesso!");
                 
-                //Carregando lista de filmes
+                //Carregando lista 
                 listarAgendamentoTabela();
-                
             }
             
         }
 
         //Limpando o form
-        limparCampos();*/
+        limparCampos();
     }
     /**
      * Limpa os campos do formulário
      */
     private void limparCampos() {
         tfID.setText("");
-        tfCliente.setText("");
+        cbCliente.setValue(null);
         taValor.setText("");
         dateAgendamento.setValue(null);
         timeAgendamento.setValue(null);
@@ -218,7 +268,7 @@ public class AgendarClientesController implements Initializable {
      @FXML
     private void editar(ActionEvent event) {
         
-      /*  //Pegar o agendamento selecionado na tabela 
+        //Pegar o agendamento selecionado na tabela 
         selecionado = tabela.getSelectionModel().getSelectedItem();
 
         //Se tem algum agendamento selecionado
@@ -226,20 +276,24 @@ public class AgendarClientesController implements Initializable {
             
             //Pega os dados do agendamento e joga no formulário
             tfID.setText(String.valueOf(selecionado.getId_Agendamento()));
-            tfCliente.setText(selecionado.getCliente().toString());
+            cbCliente.setValue(selecionado.getCliente());
             taValor.setText(selecionado.getValor().toString());
             dateAgendamento.setValue(selecionado.getDataAgendamento());
             timeAgendamento.setValue(selecionado.getHoraAgendamento());
+            cbPorteDoAutomovel.setValue(selecionado.getPorteDoAutomovel());
+            cbTipoDeLavagem.setValue(selecionado.getTipoDeLavagem());
             
         }else{//não selecionou agendamento na tabela
             AlertaUtil.mensagemErro("Selecione um Clinte.");
-        }*/
+            
+            
+        }
     }
 
     @FXML
     private void excluir(ActionEvent event) {
         
-        /*//Pegar o agendamento selecionado na tabela 
+        //Pegar o agendamento selecionado na tabela 
         selecionado = tabela.getSelectionModel().getSelectedItem();
         
         //Se tem algum agendamento selecionado
@@ -263,13 +317,13 @@ public class AgendarClientesController implements Initializable {
                 listarAgendamentoTabela();
             }
         
-        }*/
+        }
     }
     
     @FXML
     private void pesquisar(ActionEvent event) {
         
-       /*  //Limpando quaisquer dados anteriores
+         //Limpando quaisquer dados anteriores
         dados.clear();
 
         //Pegando o cliente que a pessoa deseja pesquisar
@@ -285,8 +339,8 @@ public class AgendarClientesController implements Initializable {
         //Jogando os dados na tabela
         tabela.setItems(dados);
         
-    }*/
+    }
 
     }
     
-}     
+    

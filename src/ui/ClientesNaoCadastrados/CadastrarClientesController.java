@@ -206,8 +206,7 @@ public class CadastrarClientesController implements Initializable {
     private void editar(ActionEvent event) {
     
          //Pegar o acliente que foi selecionado na tabela
-        selecionado = tabela.getSelectionModel()
-                .getSelectedItem();
+        selecionado = tabela.getSelectionModel().getSelectedItem();
 
         //Se tem algum cliente selecionado
         if (selecionado != null) { //tem ator selecionado
@@ -221,6 +220,7 @@ public class CadastrarClientesController implements Initializable {
             tfEmail.setText( selecionado.getEmail() );
             tfTelefone.setText( selecionado.getTelefone() );
             tfEndereco.setText( selecionado.getEndereco() );
+            
         }else{ //não tem cliente selecionado na tabela
             AlertaUtil.mensagemErro("Selecione um Cliente.");
         }

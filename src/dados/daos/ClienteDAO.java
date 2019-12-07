@@ -46,6 +46,7 @@ public class ClienteDAO {
         return consulta.getResultList();
 
     }
+    
 
     /**
      * Salva as alterações no BD

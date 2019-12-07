@@ -38,13 +38,19 @@ public class Agendamento {
     public Agendamento(){}
     
     //Construtor
-    public Agendamento(Cliente c){
+    public Agendamento(Cliente c, String pA, String tL, LocalDate dA, LocalTime hA, BigDecimal v){
         this.setCliente(c);
+        this.setPorteDoAutomovel(pA);
+        this.setTipoDeLavagem(tL);
+        this.setDataAgendamento(dA);
+        this.setHoraAgendamento(hA);
+        this.setValor(v);
+        
     }
 
-    public Agendamento(String text, LocalDate value, LocalTime value0, BigDecimal bigDecimal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   // public Agendamento(String text, LocalDate value, LocalTime value0, BigDecimal bigDecimal) {
+        
+   // }
     public String getPorteDoAutomovel() {
         return porteDoAutomovel;
     }
