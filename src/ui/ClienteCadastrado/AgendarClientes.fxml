@@ -7,7 +7,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,12 +19,12 @@
       <JFXComboBox fx:id="cbPorteDoAutomovel" layoutX="188.0" layoutY="102.0" onAction="#cbPorteDoAutomovel" prefHeight="28.0" prefWidth="216.0" />
       <JFXComboBox fx:id="cbTipoDeLavagem" layoutX="551.0" layoutY="102.0" onAction="#cbTipoDeLavagem" prefHeight="28.0" prefWidth="216.0" />
       <JFXDatePicker fx:id="dateAgendamento" layoutX="188.0" layoutY="175.0" prefHeight="26.0" prefWidth="247.0" />
-      <JFXTimePicker fx:id="timeAgendamento" layoutX="549.0" layoutY="175.0" prefHeight="26.0" prefWidth="216.0" />
-      <JFXTextArea fx:id="taValor" labelFloat="true" layoutX="17.0" layoutY="235.0" prefHeight="38.0" prefWidth="127.0" promptText="Valor" />
+      <JFXTimePicker fx:id="timeAgendamento" layoutX="551.0" layoutY="175.0" prefHeight="26.0" prefWidth="216.0" />
+      <JFXTextArea fx:id="taValor" labelFloat="true" layoutX="12.0" layoutY="235.0" prefHeight="38.0" prefWidth="127.0" promptText="Valor" />
       <JFXButton layoutX="533.0" layoutY="241.0" onAction="#salvar" text="Salvar" />
       <JFXButton layoutX="717.0" layoutY="241.0" onAction="#excluir" text="Excluir" />
       <JFXButton layoutX="623.0" layoutY="241.0" onAction="#editar" text="Editar" />
-      <TableView fx:id="tabela" layoutX="2.0" layoutY="354.0" prefHeight="236.0" prefWidth="893.0">
+      <TableView fx:id="tabela" layoutX="2.0" layoutY="299.0" prefHeight="291.0" prefWidth="893.0">
         <columns>
           <TableColumn fx:id="c1ID" prefWidth="55.0" text="ID" />
           <TableColumn fx:id="c2Cliente" prefWidth="148.0" text="Cliente" />
@@ -33,13 +32,11 @@
             <TableColumn fx:id="c4TipoDeLavagem" prefWidth="132.0" text="Tipo de Lavagem" />
             <TableColumn fx:id="c5DataDoAgendamento" prefWidth="163.0" text="Data do Agendamento" />
             <TableColumn fx:id="c6Valor" prefWidth="95.0" text="Valor" />
-            <TableColumn fx:id="c7HoraDoAgendamento" maxWidth="4000.0" prefWidth="138.0" text="Hora do Agendamento" />
+            <TableColumn fx:id="c7HoraDoAgendamento" maxWidth="4000.0" prefWidth="146.0" text="Hora do Agendamento" />
         </columns>
       </TableView>
       <JFXTextField fx:id="tfID" editable="false" labelFloat="true" layoutX="14.0" layoutY="39.0" prefHeight="26.0" prefWidth="79.0" promptText="ID" />
-      <Separator layoutX="4.0" layoutY="294.0" prefHeight="0.0" prefWidth="800.0" />
-      <JFXTextField fx:id="tfPesquisar" labelFloat="true" layoutX="7.0" layoutY="313.0" prefHeight="26.0" prefWidth="363.0" promptText="Cliente" />
-      <JFXButton layoutX="397.0" layoutY="310.0" onAction="#pesquisar" text="Pesquisar" />
+      <JFXButton layoutX="401.0" layoutY="241.0" onAction="#pesquisar" text="Pesquisar Data" />
       <JFXComboBox fx:id="cbCliente" layoutX="168.0" layoutY="40.0" prefHeight="25.0" prefWidth="600.0" promptText="Selecione um Cliente" />
    </children>
 </AnchorPane>

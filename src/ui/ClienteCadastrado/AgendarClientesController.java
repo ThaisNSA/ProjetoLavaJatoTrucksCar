@@ -32,6 +32,9 @@ import javafx.util.Callback;
 import servicos.AgendamentoServico;
 import servicos.ClienteServico;
 import util.AlertaUtil;
+import java.time.LocalDate;
+import static java.time.LocalDate.parse;
+import java.time.format.DateTimeFormatter;
 
 /**
  * FXML Controller class
@@ -54,8 +57,6 @@ public class AgendarClientesController implements Initializable {
     private JFXTimePicker timeAgendamento;
     @FXML
     private JFXTextArea taValor;
-    @FXML
-    private JFXTextField tfPesquisar;
     
       //Atributos para representar os servicos
     private AgendamentoServico agendamentoServico = new AgendamentoServico();
@@ -128,8 +129,9 @@ public class AgendarClientesController implements Initializable {
         //Criar uma Lista JavaFX de String para
         //colocar no combobox
         ObservableList lista2 = FXCollections.observableArrayList();
-        lista2.add("Ducha");
-        lista2.add("Lavagem Completa");
+        lista2.add("Ducha Rápida");
+        lista2.add("Ducha Completa");
+        lista2.add("Lavagem Completa com Motor");
         
         //Adicionar a lista no comboBox
         cbTipoDeLavagem.setItems(lista2);
@@ -327,10 +329,11 @@ public class AgendarClientesController implements Initializable {
         dados.clear();
 
         //Pegando o cliente que a pessoa deseja pesquisar
-        String cliente = tfPesquisar.getText();
+        LocalDate dataAgendamento = dateAgendamento.getValue();
+        
         
         //Solicitando a camada de servico a lista de clientes
-        List<Agendamento> agendamento = agendamentoServico.buscarPeloCliente(cliente);
+        List<Agendamento> agendamento = agendamentoServico.buscarPelaDataAgendamento(dataAgendamento);
 
         //Transformar a lista de clientes no formato que a tabela
         //do JavaFX aceita

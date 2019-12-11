@@ -4,6 +4,7 @@ package dados.daos;
 
 import dados.entidades.Agendamento;
 import dados.entidades.Cliente;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -92,18 +93,18 @@ public class AgendamentoDAO {
 
     }
 
-    public List<Agendamento> buscarPeloCliente(String cliente) {
+    public List<Agendamento> buscarPelaDataAgendamento(LocalDate dataAgendamento) {
 
         //Pegando o gerenciador de acesso ao BD
         EntityManager gerenciador = JPAUtil.getGerenciador();
 
         //Criando a consulta ao BD
         TypedQuery<Agendamento> consulta = gerenciador.createQuery(
-                "Select a from Agendamento a where a.cliente like :cliente",
+                "Select a from Agendamento a where a.dataAgendamento like : dataAgendamento",
                 Agendamento.class);
 
         //Substituindo o parametro :cliente pelo valor da variavel c
-        consulta.setParameter("cliente", cliente + "%");
+        consulta.setParameter("dataAgendamento", dataAgendamento);
 
         //Retornar os dados
         return consulta.getResultList();
@@ -126,28 +127,6 @@ public class AgendamentoDAO {
         
     }
 
-    /*public void removerAtorDoFilme(FilmeAtor filmeAtor) {
-        
-        Filme filme = filmeAtor.getFilme();
-        Ator ator = filmeAtor.getAtor();
-        
-        //Pegando o gerenciador de acesso ao BD
-        EntityManager gerenciador = JPAUtil.getGerenciador();
-
-        //Iniciar a transação
-        gerenciador.getTransaction().begin();
-
-        //sincronizar com o BD para tornar o status managed
-        filme = gerenciador.merge(filme);
-        ator = gerenciador.merge(ator);
-        
-        //Adicionar o ator
-        filme.getAtores().remove(ator);
-
-        //Commit na transação
-        gerenciador.getTransaction().commit();
-        
-    }*/
 
 }
 

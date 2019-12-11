@@ -4,6 +4,7 @@ package servicos;
 import dados.daos.AgendamentoDAO;
 import dados.entidades.Agendamento;
 import dados.entidades.Cliente;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class AgendamentoServico {
     
     //Atributo para representar a camada de dados
     private AgendamentoDAO dao = new AgendamentoDAO();
+    
     
     /**
      * Solicita a camada DAO para buscar os clientes
@@ -66,12 +68,12 @@ public class AgendamentoServico {
         dao.excluir(a);
     }
     
-    public List<Agendamento> buscarPeloCliente(String cliente){
+    public List<Agendamento> buscarPelaDataAgendamento(LocalDate dataAgendamento){
         
         //Qualquer regra de negócio (se aplicável)
         
         //Mandar para a DAO buscar os clientes pelo nome
-        return dao.buscarPeloCliente(cliente);
+        return dao.buscarPelaDataAgendamento(dataAgendamento);
     }
     
    
@@ -81,6 +83,15 @@ public class AgendamentoServico {
         //Mandar a DAO atualizar os dados no BD
         dao.incluirClienteNoAgendamento(agendamento, cliente);
     }        
+
+//    public List<Agendamento> buscarPelaDataAgendamento(String dataAgendamento) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    public void excluir(Cliente selecionado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
     
 

@@ -1,5 +1,7 @@
 package dados.entidades;
 
+
+import excecoes.ValorInvalidoException;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Id;
 @Entity
 public class Cliente {
 
-    private String nome;
+    
     private String email;
     private String telefone;
     private String endereco;
@@ -18,21 +20,26 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_cadastro;
     private String cpfCnpj;
-    
+    private String nome;
     
     //Construtor vazio da JPA (OBRIGATÓRIO)
     public Cliente(){}
     
     //Construtor
-    public Cliente(String n){
+    public Cliente(String n) throws ValorInvalidoException{
         this.setNome(n);
-    }
+   }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) 
+            throws ValorInvalidoException {
+        
+        if(!nome.matches("[\\p{L}\\s]+")){
+            throw new ValorInvalidoException("Nome Inválido! São aceitos apenas letras e espaços.");
+        }
         this.nome = nome;
     }
 
@@ -65,7 +72,8 @@ public class Cliente {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone){
+        
         this.telefone = telefone;
     }
 

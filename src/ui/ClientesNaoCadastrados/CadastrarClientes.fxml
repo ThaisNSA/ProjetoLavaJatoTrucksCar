@@ -8,18 +8,18 @@
 
 <AnchorPane id="AnchorPane" prefHeight="573.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ClientesNaoCadastrados.CadastrarClientesController">
    <children>
-      <Button layoutX="511.0" layoutY="293.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
-      <Button layoutX="598.0" layoutY="293.0" mnemonicParsing="false" onAction="#editar" text="Editar" />
-      <Button layoutX="682.0" layoutY="293.0" mnemonicParsing="false" onAction="#excluir" text="Excluir" />
-      <Button layoutX="420.0" layoutY="293.0" mnemonicParsing="false" onAction="#agendar" text="Agendar" />
-      <TableView fx:id="tabela" layoutX="12.0" layoutY="362.0" prefHeight="197.0" prefWidth="750.0">
+      <Button layoutX="696.0" layoutY="87.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+      <Button layoutX="696.0" layoutY="147.0" mnemonicParsing="false" onAction="#editar" text="Editar" />
+      <Button layoutX="695.0" layoutY="202.0" mnemonicParsing="false" onAction="#excluir" text="Excluir" />
+      <Button layoutX="686.0" layoutY="258.0" mnemonicParsing="false" onAction="#agendar" text="Agendar" />
+      <TableView fx:id="tabela" layoutX="1.0" layoutY="342.0" prefHeight="230.0" prefWidth="771.0">
         <columns>
           <TableColumn fx:id="C1ID" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="C2Nome" prefWidth="111.0" text="Nome" />
-            <TableColumn fx:id="C3CpfCnpj" prefWidth="128.0" text="CPF/CNPJ" />
-            <TableColumn fx:id="C4Email" prefWidth="134.0" text="E-mail" />
-            <TableColumn fx:id="C5Telefone" prefWidth="138.0" text="Telefone" />
-            <TableColumn fx:id="C6Endereco" prefWidth="153.0" text="Endereço" />
+          <TableColumn fx:id="C2Nome" prefWidth="128.0" text="Nome" />
+            <TableColumn fx:id="C3CpfCnpj" prefWidth="127.0" text="CPF/CNPJ" />
+            <TableColumn fx:id="C4Email" prefWidth="132.0" text="E-mail" />
+            <TableColumn fx:id="C5Telefone" prefWidth="149.0" text="Telefone" />
+            <TableColumn fx:id="C6Endereco" prefWidth="159.0" text="Endereço" />
         </columns>
       </TableView>
       <JFXTextField fx:id="tfID" editable="false" labelFloat="true" layoutX="14.0" layoutY="26.0" prefHeight="26.0" prefWidth="62.0" promptText="ID" />

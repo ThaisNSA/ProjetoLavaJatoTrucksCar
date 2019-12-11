@@ -1,5 +1,6 @@
 package dados.daos;
 
+import dados.entidades.Agendamento;
 import dados.entidades.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -90,5 +91,10 @@ public class ClienteDAO {
         gerenciador.getTransaction().commit();
         
     }
+
+    public void excluir(Agendamento a) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
 }

@@ -1,6 +1,9 @@
 package dados.entidades;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -86,13 +89,33 @@ public class Agendamento {
     public BigDecimal getValor() {
         return valor;
     }
+    
+     /**
+     * Para retornar uma String com o valor da arrecadaco
+     * formatada no formato parecido com dinheiro
+     * @return 
+     */
+    public String getValorFormatado(){
+        DecimalFormat formatador = new DecimalFormat("#0.00");
+        return formatador.format(valor);
+    }
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
     
-   
-    
+     /**
+     * Recebe um valor de arrecadacao com virgula 
+     * e converte no formato correto pra salvar no BD
+     */
+    public void Valor(String valor) 
+            throws ParseException{
+        
+        NumberFormat formatador = NumberFormat.getInstance();
+        this.valor = new BigDecimal(
+                        formatador.parse(valor).toString());
+        
+    }
 
     public Integer getId_Agendamento() {
         return id_Agendamento;

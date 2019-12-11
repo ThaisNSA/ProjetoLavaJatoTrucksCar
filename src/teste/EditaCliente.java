@@ -1,12 +1,13 @@
 package teste;
 
 import dados.entidades.Cliente;
+import excecoes.ValorInvalidoException;
 import javax.persistence.EntityManager;
 import util.JPAUtil;
 
 public class EditaCliente {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ValorInvalidoException {
         
         //Pegando o gerenciador de acesso ao BD
         EntityManager gerenciador = JPAUtil.getGerenciador();

@@ -1,12 +1,13 @@
 package teste;
 
 import dados.entidades.Cliente;
+import excecoes.ValorInvalidoException;
 import javax.persistence.*;
 import util.JPAUtil;
 
 public class TestaCliente {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ValorInvalidoException {
         
         //Criando um objeto cliente
         Cliente c1 = new Cliente();

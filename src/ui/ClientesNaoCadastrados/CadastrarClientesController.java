@@ -3,6 +3,8 @@ package ui.ClientesNaoCadastrados;
 
 import com.jfoenix.controls.JFXTextField;
 import dados.entidades.Cliente;
+import excecoes.ValorInvalidoException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +13,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import servicos.ClienteServico;
 import util.AlertaUtil;
 /**
@@ -80,13 +88,15 @@ public class CadastrarClientesController implements Initializable {
     }    
 
     @FXML
-    private void salvar(ActionEvent event) {
+    private void salvar(ActionEvent event) throws ValorInvalidoException {
         
        // System.out.println("teste1");
         
          //Verificar se está atualizando ou inserindo
         if(tfID.getText().isEmpty()){ //inserindo
             
+        
+            try{
             
            // System.out.println("teste");
             //Pega os dados do fomulário
@@ -107,6 +117,10 @@ public class CadastrarClientesController implements Initializable {
             
             //Chama o metodo para atualizar a tabela
             listarClientesTabela();
+            }
+             catch(ValorInvalidoException ex){
+                AlertaUtil.mensagemErro(ex.getMessage());
+             }
             
         }else{ //atualizando o cliente
            
@@ -117,6 +131,8 @@ public class CadastrarClientesController implements Initializable {
            
             //Se o botão OK foi pressionado
             if(btn.get() == ButtonType.OK){
+                
+                try{
                 //Pegar os novos dados do formulário e
                 //atualizar o meu cliente
                 
@@ -135,6 +151,11 @@ public class CadastrarClientesController implements Initializable {
                 
               //Chama o metodo para atualizar a tabela
                listarClientesTabela();
+                }
+                 catch(ValorInvalidoException ex){
+                AlertaUtil.mensagemErro(ex.getMessage());
+                 }
+                
            }
            
        }
@@ -269,8 +290,34 @@ public class CadastrarClientesController implements Initializable {
 
 
     @FXML
-    private void agendar(ActionEvent event) {
+    private void agendar(ActionEvent event) throws IOException {
+        
+ //Código para abrir uma nova Janela
+        //Ler o FXML que representa a nova janela
+        //(adicionar o throws)
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/ui/ClienteCadastrado/AgendarClientes.fxml"));
+        //Criando a cena
+        Scene scene = new Scene(root);
+        //Criando a janela (STAGE) 
+        Stage stage = new Stage(StageStyle.UTILITY);
+        //Titulo na janela
+        stage.setTitle("Agendamento");
+        //Adicionando a cena na janela
+        stage.setScene(scene);
+        
+        //Configurando o MODALITY
+        //Diz respeito ao comportamento das janelas anteriores
+        //quando essa for mostrada
+        //Para bloquear interação com as janelas anteriores
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        //Mostrando a nova janela
+        stage.show();
+                
+        
     }
+
 
 
    
